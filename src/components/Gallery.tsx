@@ -1,26 +1,38 @@
-import { useState } from 'react';
-import type { ComponentInfo, Category } from '../types';
-import SearchBar from './SearchBar';
-import CategoryFilter from './CategoryFilter';
-import ComponentCard from './ComponentCard';
+import { useState, useMemo } from "react";
+import type { ComponentInfo, Category } from "../types";
+import SearchBar from "./SearchBar";
+import CategoryFilter from "./CategoryFilter";
+import ComponentCard from "./ComponentCard";
 
 interface GalleryProps {
   components: ComponentInfo[];
 }
 
 function Gallery({ components }: GalleryProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<Category | 'All'>('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<Category | "All">(
+    "All"
+  );
 
-  // TODO: Implement filtering logic here
+  // ✅ Filtering logic (search + category)
+  const filteredComponents = useMemo(() => {
+    return components.filter((comp) => {
+      const matchesSearch =
+        comp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        comp.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const matchesCategory =
+        selectedCategory === "All" || comp.category === selectedCategory;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [components, searchQuery, selectedCategory]);
 
   return (
     <div className="gallery">
+      {/* ✅ Controls */}
       <div className="gallery-controls">
-        <SearchBar
-          value={searchQuery}
-          onChange={setSearchQuery}
-        />
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
         <CategoryFilter
           selected={selectedCategory}
@@ -28,14 +40,16 @@ function Gallery({ components }: GalleryProps) {
         />
       </div>
 
+      {/* ✅ Result count */}
       <div className="gallery-results">
-        {/* TODO: Display result count */}
-        <p className="result-count">Showing {components.length} components</p>
+        <p className="result-count">
+          Showing {filteredComponents.length} components
+        </p>
       </div>
 
+      {/* ✅ Grid of cards */}
       <div className="gallery-grid">
-        {/* TODO: Map and display filtered components */}
-        {components.map(comp => (
+        {filteredComponents.map((comp) => (
           <ComponentCard key={comp.id} info={comp} />
         ))}
       </div>
