@@ -59,7 +59,7 @@ function FormDemo() {
               padding: "0.5rem 1rem",
               fontSize: "1rem",
               cursor: isValidEmail ? "pointer" : "not-allowed",
-              opacty: isValidEmail ? 1 : 0.5,
+              opacity: isValidEmail ? 1 : 0.5,
             }}
           >
             Submit
