@@ -19,8 +19,8 @@ function CardDemo() {
       }}
     >
       {/* ✅ Always-visible profile info */}
-      <h3 style={{ marginBottom: "0.25rem" }}>Jane Doe</h3>
-      <p style={{ color: "#555", marginTop: 0 }}>Frontend Developer</p>
+      <h3 style={{ marginBottom: "0.25rem" }}>D V Krishna Reddy</h3>
+      <p style={{ color: "#555", marginTop: 0 }}>OMS Developer</p>
 
       {/* ✅ Toggle button */}
       <button
@@ -38,7 +38,7 @@ function CardDemo() {
       {/* ✅ Conditional rendering */}
       {expanded && (
         <div style={{ marginTop: "1rem", color: "#444" }}>
-          <p><strong>Email:</strong> jane@example.com</p>
+          <p><strong>Email:</strong> dvkrishnareddy776@gmail.com</p>
           <p><strong>Location:</strong> Bengaluru, India</p>
           <p><strong>Skills:</strong> React, TypeScript, UI Design</p>
         </div>
